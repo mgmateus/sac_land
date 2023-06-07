@@ -1,0 +1,15 @@
+name: hydrone_navigation
+root: ./
+startup_window: simulation
+windows:
+  - connection:
+      layout: tiled
+      panes:
+        - roslaunch airsim_ros_pkgs airsim_node.launch output:=screen host:='172.20.0.2'
+
+  - simulation:
+      layout: tiled
+      panes:
+        - sleep 4; roslaunch sac_land_pkg simulation.launch
+
+  

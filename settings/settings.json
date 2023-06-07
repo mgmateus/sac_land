@@ -1,0 +1,107 @@
+{
+  "SeeDocsAt": "https://github.com/Microsoft/AirSim/blob/main/docs/settings.md",
+  "SettingsVersion": 1.2,
+  "SimMode": "Multirotor",
+  "ViewMode": "SpringArmChase",
+  "ClockSpeed": 1,
+  "ApiServerPort": 41451,
+  "RecordUIVisible": true,
+  "LogMessagesVisible": true,
+  "ShowLosDebugLines": false,
+  "RpcEnabled": true,
+  "EngineSound": true,
+  "PhysicsEngineName": "",
+  "SpeedUnitFactor": 1.0,
+  "SpeedUnitLabel": "m/s",
+  "Wind": { "X": 0, "Y": 0, "Z": 0 },
+  "Vehicles": {
+    "Hydrone": {
+      "VehicleType": "SimpleFlight",
+      "DefaultVehicleState": "Armed",
+      "EnableCollisionPassthrogh": false,
+      "EnableCollisions": true,
+      "AllowAPIAlways": true,
+      "Sensors": {
+        "Imu" : {
+          "SensorType": 2,
+          "Enabled": true
+        }
+      },
+      "Cameras": {
+        "Stereo_Cam": {
+          "CaptureSettings": [
+            {
+              "PublishToRos": 1,
+              "ImageType": 0,
+              "Width": 672,
+              "Height": 376,
+              "FOV_Degrees": 90.0,
+              "AutoExposureSpeed": 100,
+              "MoutionBlurAmount": 0                    
+            },
+            {
+              "PublishToRos": 1,
+              "ImageType": 2,
+              "Width": 672,
+              "Height": 376,
+              "FOV_Degrees": 90.0,
+              "AutoExposureSpeed": 100,
+              "MoutionBlurAmount": 0
+            }
+          ],
+          "X": 0.5, "Y": 0, "Z": 0.10,
+          "Pitch":0.0, "Roll": 0.0, "Yaw": 0.0
+        },
+        "Segmentation_Image": {
+          "CaptureSettings": [
+            {
+              "PublishToRos": 1,
+              "ImageType": 5,
+              "Width": 672,
+              "Height": 376,
+              "FOV_Degrees": 90,
+              "TargetGamma": 1.5
+            }
+          ],
+          "X": 0.5, "Y": 0.0, "Z": 0.10,
+          "Pitch": 0.0, "Roll": 0.0, "Yaw": 0.0
+        },
+        "DepthMap": {
+          "CaptureSettings": [
+            {
+              "PublishToRos": 1,
+              "ImageType": 3,
+              "Width": 672,
+              "Height": 376,
+              "FOV_Degrees": 90,
+              "TargetGamma": 1.5
+            }
+          ],
+          "X": 0.5, "Y": 0.0, "Z": 0.10,
+          "Pitch": 0.0, "Roll": 0.0, "Yaw": 0.0
+        },
+        "Bottom": {
+          "CaptureSettings": [
+            {
+              "PublishToRos": 1,
+              "ImageType": 1,
+              "Width": 672,
+              "Height": 376,
+              "FOV_Degrees": 90,
+              "TargetGamma": 1.5
+            }
+          ],
+          "X": 0.5
+          , "Y": 0, "Z": 0.10,
+          "Pitch": -90.0, "Roll": 0.0, "Yaw": 0.0
+        }
+    
+      }
+    }
+    
+  },
+  "SubWindows": [
+    {"WindowID": 0, "ImageType": 0, "CameraName": "Bottom", "Visible": true}
+  ]
+  
+}
