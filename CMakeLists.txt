@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(sac_land_pkg)
+project(sac_land)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -113,7 +113,7 @@ catkin_python_setup()
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS
-  CATKIN_DEPENDS message_runtime roscpp std_msgs  airsim_ros_pkgs
+  CATKIN_DEPENDS message_runtime roscpp std_msgs  airsim_ros_pkgs yolov7_ros
 )
 
 ###########

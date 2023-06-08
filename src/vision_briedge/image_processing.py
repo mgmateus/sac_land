@@ -10,7 +10,6 @@ class ImageProcessing:
     #Converte a mensagem de imagem ros para opencv
     @staticmethod
     def image_transport(img_msg):
-        rospy.logwarn(img_msg.header)
         try:
             return CvBridge().imgmsg_to_cv2(img_msg, "passthrough")
 
@@ -18,33 +17,33 @@ class ImageProcessing:
             rospy.logerr("CvBridge Error: {0}".format(e))
 
     def __init__(self):
-        self.__rgb = []
-        self.__depth = []
-        self.__segmentation = []
+        self._rgb = []
+        self._depth = []
+        self._segmentation = []
 
     @property
     def rgb(self):
-        return self.__rgb
+        return self._rgb
     
     @property
     def depth(self):
-        return self.__depth
+        return self._depth
     
     @property
     def segmentation(self):
-        return self.__segmentation
+        return self._segmentation
     
     @rgb.setter
     def rgb(self, store):
-        self.__rgb = store
+        self._rgb = store
     
     @depth.setter
     def depth(self, store):
-        self.__depth = store
+        self._depth = store
 
     @segmentation.setter
     def segmentation(self, store):
-        self.__segmentation = store
+        self._segmentation = store
 
     #Armazena as imagens em seus respectivos vetores (rgb, depth e segmentation)
     def store_images(self, type, img, store_size=3):            

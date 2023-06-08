@@ -1,3 +1,3 @@
 <launch>
-	<node name="simulation" pkg="sac_land_pkg" type="main.py"/>
+	<node name="simulation" pkg="sac_land" type="main.py"/>
 </launch>

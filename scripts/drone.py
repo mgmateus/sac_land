@@ -2,6 +2,8 @@ import rospy
 import os
 import cv2
 
+import numpy as np
+
 from std_msgs.msg import *
 from sensor_msgs.msg import *
 from nav_msgs.msg import *
@@ -9,8 +11,10 @@ from airsim_ros_pkgs.msg import *
 
 from airsim_ros_pkgs.srv import *
 
-from sac_land_pkg.image_processing import ImageProcessing
+from vision_briedge.image_processing import ImageProcessing
 
+LINEAR_VEL = (0.0, 0.5)
+ANGULAR_VEL = (-0.25, 0.25)
 
 
 class Hydrone:
@@ -21,10 +25,11 @@ class Hydrone:
         rospy.Subscriber("/airsim_node/Hydrone/Segmentation_Image/Segmentation", Image, self.__call_segmentation)
         rospy.Subscriber("/airsim_node/Hydrone/Bottom/Scene", Image, self.__call_bottom)
 
-
+        self.__vel_pub = rospy.Publisher("/airsim_node/Hydrone/vel_cmd_world_frame", VelCmd, queue_size=1)
         self.__pub_info = rospy.Publisher("drone_info", String, queue_size=10)
 
         self.__img_process = ImageProcessing()
+        self.__vel = VelCmd()
 
     @property
     def img_process(self):
@@ -55,14 +60,16 @@ class Hydrone:
             self.__pub_info.publish(info)
 
     def __call_bottom(self, data):
-        info = "Bottom cam ok!"
         if data:
-            info = "Bottom cam is ok!"
-            cv_segmentation = self.__img_process.image_transport(data)
-            self.__img_process.store_images("bottom", cv_segmentation)
+            cv_bottom = self.__img_process.image_transport(data)
         else:
             info = "Error in Bottom cam!"
-        self.__pub_info.publish(info)
+            self.__pub_info.publish(info)
+
+    def get_state(self, action):
+        self.__vel.twist.linear.x = np.clip(action[0], LINEAR_VEL[0], LINEAR_VEL[1])
+        self.__vel.twist.angular.z = np.clip(action[1], ANGULAR_VEL[0], ANGULAR_VEL[1])
+        self.__vel_pub.publish()
 
     def __str__(self) -> str:
         return 'Hydrone'

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>sac_land_pkg</name>
+  <name>sac_land</name>
   <version>0.0.0</version>
   <description>The sac_land_pkg package</description>
 
