@@ -36,7 +36,7 @@ class Hydrone:
         if data:
             cv_bottom = self.__img_process.image_transport(data)
             cv2.imshow("Cam", cv_bottom)
-            cv2.waitKey(3)
+            cv2.waitKey(0)
         else:
             info = "Error in Bottom cam!"
             self.__info_pub.publish(info)
@@ -45,7 +45,7 @@ class Hydrone:
         if data:
             cv_inference = self.__img_process.image_transport(data)
             cv2.imshow("Inference", cv_inference)
-            cv2.waitKey(3)
+            cv2.waitKey(0)
         else:
             info = "Error in Bottom cam!"
             self.__info_pub.publish(info)
