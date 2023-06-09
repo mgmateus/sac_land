@@ -43,6 +43,7 @@ class Hydrone:
 
     def __call_inference(self, data):
         if data:
+            rospy.logwarn('Inference')
             cv_inference = self.__img_process.image_transport(data)
             cv2.imshow("Inference", cv_inference)
             cv2.waitKey(0)
