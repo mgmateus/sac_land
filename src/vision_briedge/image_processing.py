@@ -1,6 +1,7 @@
-
+#!/usr/bin/env python3
 import cv2
 import rospy
+from datetime import datetime
 
 from cv_bridge import CvBridge, CvBridgeError
 
@@ -16,7 +17,9 @@ class ImageProcessing:
         except CvBridgeError as e:
             rospy.logerr("CvBridge Error: {0}".format(e))
 
-    def __init__(self):
+    def __init__(self, dir):
+        self.__dir = dir
+
         self._rgb = []
         self._depth = []
         self._segmentation = []
@@ -54,6 +57,7 @@ class ImageProcessing:
         else:
             imgs = self.__getattribute__(type)
             imgs.insert(0, img)
+            del imgs[-1]
 
             self.__setattr__(type, None) #Limpa o vetor de imagens
             self.__setattr__(type, imgs) #Redefine com a nova fila
@@ -64,8 +68,11 @@ class ImageProcessing:
             cv2.imwrite(path+"/"+type+"/t_"+str(count)+".png", img)
             count += 1
     
+    def save_image(self, img, dir= "", name= ""):
+        _name = str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")).replace("/", "_")
+        _name = f"{(dir or self.__dir)}/{(name or _name)}.png"
+        cv2.imwrite(_name, img)
             
-
 
 
 

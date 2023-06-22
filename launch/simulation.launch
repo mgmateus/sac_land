@@ -1,3 +1,0 @@
-<launch>
-	<node name="simulation" pkg="sac_land" type="main.py"/>
-</launch>
